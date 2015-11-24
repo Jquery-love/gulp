@@ -1,0 +1,10 @@
+@import '_parts/_common';
+body{ 
+	background: #f5f5f5;
+	ul{padding:0;
+		li{padding:5px 0;color:red;border-bottom:1px solid #fff;
+			&:after{content:'';width:10px;height:10px;border:1px solid #000;background-color:red;display:inline-block;}
+		}  
+	}
+	background:url('../img/baidu_jgylogo3.gif') no-repeat  0 0; 
+}
