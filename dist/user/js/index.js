@@ -1,0 +1,1 @@
+webpackJsonp([0,1],[function(o,n){var c=1,a=c+1;console.log(a)}]);

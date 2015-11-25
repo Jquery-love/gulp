@@ -11,23 +11,54 @@ gulp.task('jshint', function () {
         .pipe(plugins.jshint.reporter('default')); //错误默认提示
         // .pipe(plugins.jshint.reporter(plugins.stylish)); //高亮提示
 });
-
+var pathDir = 'user';
 gulp.task('webpack', function () {
-    gulp.src('public/**/*.js')
-        .pipe(plugins.webpack())
+	var pathTemp;
+    gulp.src('public/**/js/*.js')
+        .pipe(plugins.rename(function(path){
+        	// console.log(path.dirname);
+			pathTemp = path.dirname;
+			// config = require('./public/'+ path.dirname.slice(0,path.dirname.indexOf("\\")) +'/webpack.config.js');
+			// path.dirname = path.dirname.replace(/(?!\\)scss/gi,'css');
+		}))
+        .pipe(plugins.webpack(require('./public/'+ pathDir +'/webpack.config')))
         .pipe(plugins.uglify())
-        .pipe(gulp.dest('dist'));
+        .pipe(gulp.dest('dist'))
+        .pipe(plugins.rev())
+        .pipe(gulp.dest('dist'))
+        .pipe(plugins.rev.manifest())
+        .pipe(plugins.rename(function(path){
+			path.dirname = pathTemp; 
+		}))
+		.pipe(gulp.dest('public'))
+		.pipe(plugins.livereload())
+		.pipe(plugins.notify({message: "webpack task complete"}));
 });
 
-// 合并文件之后压缩代码
-gulp.task('minify', function (){
-     return gulp.src('public/*/*.js')
-        .pipe(plugins.concat('all.js'))
-        .pipe(gulp.dest('dist'))
-        .pipe(plugins.uglify())
-        .pipe(plugins.rename('all.min.js'))
-        .pipe(gulp.dest('dist'));
-});
+// gulp.task('webpack', function (callback) {
+// 	var pathTemp,config;
+// 	return gulp.src('public/**/js/*.js')
+// 		.pipe(plugins.webpack({
+// 			entry: {
+// 		        index: './public/user/js/index.js',
+// 		    },
+// 		    output: {
+// 		        filename: 'user/js/[name].js'
+// 		    }
+// 		}))
+// 		// .pipe(plugins.uglify())
+//     	.pipe(gulp.dest('dist'))
+// });
+// gulp.task('webpack', function (callback) {
+// 	var pathTemp;
+// 	// var myConfig = Object.create(webpackConfig);
+// 	return gulp.src('public/**/js/*.js')
+// 		.pipe(plugins.webpack(config))
+// 		// .pipe(plugins.uglify())
+//     	.pipe(gulp.dest('dist'))
+// });
+
+
 
 //将scss 文件生成css文件
 gulp.task('sass',function(){
@@ -71,7 +102,7 @@ gulp.task('miniHtml',function () {
   	return gulp.src(['public/**/rev\-*.json','public/**/*.ejs'])
     	.pipe(plugins.revCollector())
     	.pipe(gulp.dest('public'))
-    	.pipe(plugins.notify({message: "miniHtml ejs complete"}));
+    	.pipe(plugins.notify({message: "miniHtml complete"}));
 });
 //CSS里更新引入文件版本号
 
@@ -111,7 +142,7 @@ gulp.task('connect', function () {
 // });
 
 // 注册缺省任务
-gulp.task('default', function(){
+gulp.task('user', function(){
 	gulp.start('connect','miniHtml');
 	gulp.start('watch');
 });
