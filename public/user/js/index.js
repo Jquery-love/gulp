@@ -1,3 +1,8 @@
-var a = 1 ;
-var b = a + 1;
-console.log(b);  
+var a = require('./a');
+// var b = require('./b');
+// var d = require('./d');
+// console.log(d());
+require(['./d','./b'],function(d,b){
+	console.log(d(),b());
+	var c = require('./c'); 
+});

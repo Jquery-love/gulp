@@ -17,12 +17,14 @@ var gcf = {
 
 var dirs = fs.readdirSync(path.join(__dirname,gcf.dev));
 
-gulp.task('jshint', function () {
-    return gulp.src(gcf.dev + '/**/*.js')
-        .pipe(plugins.jshint())
-        .pipe(plugins.jshint.reporter('default')); //错误默认提示
-        // .pipe(plugins.jshint.reporter(plugins.stylish)); //高亮提示
-});
+// gulp.task('jshint', function () {
+//     return gulp.src(gcf.dev + '/**/*.js')
+//         .pipe(plugins.jshint({
+//         	lookup : false
+//         }))
+//         .pipe(plugins.jshint.reporter('default')); //错误默认提示
+//         // .pipe(plugins.jshint.reporter(plugins.stylish)); //高亮提示
+// });
 gulp.task('webpack', function (cb) {
 	var bundle = function(err, stats){
 		if(err) throw new plugins.util.PluginError("webpack", err);
@@ -33,8 +35,7 @@ gulp.task('webpack', function (cb) {
         cb();
 	};
 	var config = require( './'+gcf.dev + '/'+ gcf.item +'/webpack.config');
-	var compiler = webpack(config);
-	compiler.watch({},bundle);
+	webpack(config,bundle);
 });
 
 //将scss 文件生成css文件
@@ -65,7 +66,7 @@ gulp.task('ejs',function(){
 // 监视文件的变化
 gulp.task('watch', function () {
 	plugins.livereload.listen();
-    gulp.watch(gcf.dev + '/**/*.js', ['jshint', 'webpack']);
+    gulp.watch(gcf.dev + '/**/*.js', ['webpack']);
     gulp.watch(gcf.dev + '/**/*.ejs',['ejs']);
  	gulp.watch(gcf.dev + '/**/*.scss', ['sass']);
 });

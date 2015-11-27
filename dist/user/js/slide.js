@@ -73,7 +73,7 @@
 /******/ 			script.charset = 'utf-8';
 /******/ 			script.async = true;
 
-/******/ 			script.src = __webpack_require__.p + "/" + {"1":"60f1a210"}[chunkId] + ".chunk.js";
+/******/ 			script.src = __webpack_require__.p + "" + chunkId + ".slide.js";
 /******/ 			head.appendChild(script);
 /******/ 		}
 /******/ 	};
@@ -85,7 +85,7 @@
 /******/ 	__webpack_require__.c = installedModules;
 
 /******/ 	// __webpack_public_path__
-/******/ 	__webpack_require__.p = "/user/js";
+/******/ 	__webpack_require__.p = "";
 
 /******/ 	// Load entry module and return exports
 /******/ 	return __webpack_require__(0);
@@ -96,12 +96,12 @@
 /***/ function(module, exports, __webpack_require__) {
 
 	var a = __webpack_require__(1);
-	// var b = require('./b');
-	// var d = require('./d');
-	// console.log(d());
-	__webpack_require__.e/* require */(1, function(__webpack_require__) { var __WEBPACK_AMD_REQUIRE_ARRAY__ = [__webpack_require__(2),__webpack_require__(3)]; (function(d,b){
-		console.log(d(),b());
-		var c = __webpack_require__(4); 
+	var b = __webpack_require__(2);
+	var d = __webpack_require__(3);
+	console.log(a);
+	__webpack_require__.e/* require */(1, function(__webpack_require__) { var __WEBPACK_AMD_REQUIRE_ARRAY__ = [__webpack_require__(4)]; (function(d){
+		console.log(d);
+		var c = __webpack_require__(17);
 	}.apply(null, __WEBPACK_AMD_REQUIRE_ARRAY__));});
 
 /***/ },
@@ -112,6 +112,26 @@
 
 	module.exports = function () {
 	  console.log('a');
+	};
+
+/***/ },
+/* 2 */
+/***/ function(module, exports) {
+
+	'use strict';
+
+	module.exports = function () {
+	  console.log('b');
+	};
+
+/***/ },
+/* 3 */
+/***/ function(module, exports) {
+
+	'use strict';
+
+	module.exports = function () {
+	  console.log('d');
 	};
 
 /***/ }
