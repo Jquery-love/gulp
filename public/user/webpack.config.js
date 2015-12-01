@@ -1,19 +1,45 @@
 var path = require('path');
 var webpack = require('webpack');
+var node_modules_dir = path.resolve(__dirname, '../../node_modules');
 var distDir = __dirname.replace('public','dist');
 var cmdDir = __dirname.replace(process.cwd()+'\\public\\','');
+var argv = require('minimist')(process.argv.slice(2));
+var DEBUG = argv.env == 'dev';
 // console.log(process.cwd(),__dirname,distDir);
 // console.log(path.join(__dirname, '../../dist/user/js'));
 // console.log(__dirname,process.cwd(),cmdDir);
 // console.log(process.chdir());
 
 // console.log(path.resolve(distDir,'js'));
+var plugins = [
+  new webpack.ProvidePlugin({
+    $: "jquery",
+    jQuery: "jquery",
+    "window.jQuery": "jquery"
+  })
+];
+
+if(!DEBUG){
+    plugins.push(new webpack.optimize.DedupePlugin());
+    plugins.push(new webpack.optimize.UglifyJsPlugin({
+        sourceMap: false,
+        compressor: true,
+        output: {comments: false}
+    }));
+    plugins.push(new webpack.optimize.AggressiveMergingPlugin());
+}
+
+// console.log(plugins,);
+
+
+
 module.exports = {
     //插件项
-    plugins: new webpack.optimize.CommonsChunkPlugin('common','common.js', Infinity),
+    plugins: plugins,
     //页面入口文件配置
     entry: {
-        index : path.resolve(__dirname,'js/index.js')
+        app : path.resolve(__dirname,'js/app.js'),
+        controllers : path.resolve(__dirname,'js/controllers.js')
     },
     //入口文件输出配置
     output: {
@@ -46,5 +72,8 @@ module.exports = {
         //     ActionType : 'js/actions/ActionType.js',
         //     AppAction : 'js/actions/AppAction.js'
         // }
-    }
+    },
+    debug: DEBUG,
+    cache: DEBUG,
+    devtool:DEBUG ? '#eval' : false
 };

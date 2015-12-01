@@ -42,6 +42,7 @@
     "gulp-webpack-config":"0.1.6",
     "gulp-util" : "3.0.7",
     "gulp-if" : "2.0.0",
-    "gulp-minify-html" : "1.0.4"
+    "gulp-minify-html" : "1.0.4",
+    "koa-webpack-dev-middleware" : "1.0.1"
   }
 }
