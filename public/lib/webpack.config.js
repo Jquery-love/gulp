@@ -13,13 +13,13 @@ var DEBUG = argv.env == 'dev';
 // console.log(path.resolve(distDir,'js'));
 
 var plugins = [
-  new webpack.ProvidePlugin({
-    $: "jquery",
-    jQuery: "jquery",
-    "window.jQuery": "jquery"
-  })
+  // new webpack.ProvidePlugin({
+  //   $: "jquery",
+  //   jQuery: "jquery",
+  //   "window.jQuery": "jquery"
+  // })
 ];
-
+console.log(DEBUG);
 if(!DEBUG){
     plugins.push(new webpack.optimize.DedupePlugin());
     plugins.push(new webpack.optimize.UglifyJsPlugin({
@@ -39,8 +39,7 @@ module.exports = {
     plugins: plugins,
     //页面入口文件配置
     entry: {
-        app : path.resolve(__dirname,'js/app.js'),
-        controllers : path.resolve(__dirname,'js/controllers.js')
+        demo : path.resolve(__dirname,'js/demo.js')
     },
     //入口文件输出配置
     output: {
@@ -59,7 +58,8 @@ module.exports = {
             // { test: /\.js$/, loader: 'jsx-loader?harmony' },
             // { test: /\.scss$/, loader: 'style!css!sass?sourceMap'},
             // { test: /\.(png|jpg)$/, loader: 'url-loader?limit=8192'}
-        ]
+        ],
+        noParse : []
     },
     externals: {
         'jquery': 'jQuery'
@@ -67,7 +67,10 @@ module.exports = {
     //其它解决方案配置
     resolve: {
         // root: 'E:/github/flux-example/src', //绝对路径
-        extensions: ['', '.js', '.json', '.scss']
+        extensions: ['', '.js', '.json', '.scss'],
+        alias: {
+            ionic : path.resolve(__dirname,'js/ionic/ionic.bundle.js')
+        }
         // alias: {
         //     AppStore : 'js/stores/AppStores.js',
         //     ActionType : 'js/actions/ActionType.js',
