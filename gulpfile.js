@@ -40,13 +40,14 @@ gulp.task('webpack', function (cb) {
 	var outPutFile = path.resolve(config.output.path,config.output.filename);
 	webpack(config,bundle);
 });
-
+// console.log(plugins.changed);
 //将scss 文件生成css文件
 gulp.task('sass',function(){
 	var config = {};
 	if(gcf.env == 'dev'){config.sourceComments = 'map';config.errLogToConsole = true;}
 	else if(gcf.env == 'prod'){config.outputStyle = 'compressed';}
 	return gulp.src([gcf.devDir + '/**/css/[^_]*.scss','!' + gcf.devDir +'/**/?parts/[^_]*.scss'])
+		.pipe(plugins.changed(gcf.outDir,{extension : '.css'}))
 		.pipe(plugins.sass(config).on('error', plugins.sass.logError))
 		.pipe(plugins.autoprefixer('last 2 version', 'safari 5', 'ie 7', 'ie 8', 'ie 9', 'opera 12.1', 'ios 6', 'android 4'))
 		.pipe(gulp.dest(gcf.outDir))
@@ -54,16 +55,21 @@ gulp.task('sass',function(){
 		.pipe(plugins.notify({message: "css task complete"}));
 });
 
+// 清空图片、样式、js
+gulp.task('clean', function() {
+    gulp.src([gcf.outDir+'/'+ gcf.item +'/css', gcf.outDir+'/'+ gcf.item +'/js', gcf.outDir+'/'+ gcf.item +'/img'], {read: false})
+        .pipe(clean());
+});
+
 gulp.task("fonts",function(){
 	return gulp.src(gcf.devDir + '/**/fonts/*')
 		.pipe(gulp.dest(gcf.outDir));
 })
 
-
-
 //将ejs 模块生成html
 gulp.task('ejs',function(){
 	return gulp.src([gcf.devDir + '/**/[^_]*.ejs','!'+ gcf.devDir + '/**/?parts/[^_]*.ejs'])
+		.pipe(plugins.changed(gcf.outDir,{extension: '.html'}))
 		.pipe(plugins.ejs({},{ext: '.html'}))
 		.pipe(plugins.if(gcf.env=='prod',plugins.minifyHtml({
 			quotes:true,
@@ -73,6 +79,15 @@ gulp.task('ejs',function(){
 		.pipe(plugins.livereload())
 		.pipe(plugins.notify({message: "ejs task complete"}));
 });
+// 图片处理
+gulp.task('img', function(){
+    var imgSrc = './src/images/**/*',
+        imgDst = './dist/images';
+    gulp.src(imgSrc)
+        .pipe(imagemin())
+        .pipe(livereload(server))
+        .pipe(gulp.dest(imgDst));
+})
 
 // 监视文件的变化
 gulp.task('watch', function () {
@@ -92,8 +107,13 @@ gulp.task('connect', function () {
 dirs.forEach(function(dir){
 	gulp.task(dir,function(){
 		var folder_exists = fs.existsSync(path.join(__dirname,gcf.devDir,gcf.item,'fonts'));
+
 		folder_exists && gulp.start('fonts');
 		gulp.start('connect');
 		gulp.start('watch');
 	})
 })
+
+gulp.task('default', function(){
+	gulp.start('sass','ejs','img','webpack')
+});
