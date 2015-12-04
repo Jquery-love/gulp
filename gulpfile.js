@@ -87,12 +87,13 @@ gulp.task('img', function(){
         .pipe(plugins.imagemin())
         .pipe(gulp.dest(gcf.outDir))
 })
-gulp.task('serve',['sass','fonts','ejs','webpack'],function(){
+gulp.task('serve',['sass','ejs'],function(){
 	browserSync({
 		notify: false,
 		port: gcf.port,
 		server:{
 			baseDir:gcf.outDir,
+			directory:true,
 			routes: {
 		 		"/bower_components": "bower_components"
 		 	}
