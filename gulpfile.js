@@ -7,9 +7,7 @@ var webpack = require('webpack');
 var plugins = require('gulp-load-plugins')();
 var browserSync = require('browser-sync');
 var reload = browserSync.reload;
-// var runSequence = require('run-sequence');
 var options = minimist(process.argv.slice(2));
-// console.log(options._[0]);
 var gcf = {
 	env : options.env || 'prod',
 	outDir: 'dist',
@@ -19,14 +17,6 @@ var gcf = {
 };
 var dirs = fs.readdirSync(path.join(__dirname,gcf.devDir));
 
-// gulp.task('jshint', function () {
-//	 return gulp.src(gcf.devDir + '/**/*.js')
-//		 .pipe(plugins.jshint({
-//		 	lookup : false
-//		 }))
-//		 .pipe(plugins.jshint.reporter('default')); //错误默认提示
-//		 // .pipe(plugins.jshint.reporter(plugins.stylish)); //高亮提示
-// });
 gulp.task('webpack', function (cb) {
 	var bundle = function(err, stats){
 		if(err) throw new plugins.util.PluginError("webpack", err);
@@ -41,7 +31,6 @@ gulp.task('webpack', function (cb) {
 	var outPutFile = path.resolve(config.output.path,config.output.filename);
 	webpack(config,bundle);
 });
-// console.log(plugins.changed);
 //将scss 文件生成css文件
 gulp.task('sass',function(){
 	var config = {};
@@ -91,15 +80,13 @@ gulp.task('serve',['sass','ejs'],function(){
 	browserSync({
 		notify: false,
 		port: gcf.port,
+		open: false,
 		server:{
 			baseDir:gcf.outDir,
-			directory:true,
-			routes: {
-		 		"/bower_components": "bower_components"
-		 	}
+			directory:true
 		}
 	});
-	gulp.watch([gcf.devDir + '/**/*.js', gcf.devDir + '/**/*.ejs',gcf.devDir + '/**/fonts/*', gcf.devDir + '/**/img/*',gcf.devDir + '/**/*.scss']).on('change', reload);
+	gulp.watch([gcf.outDir + '/**/*.js',gcf.outDir + '/**/fonts/*', gcf.outDir + '/**/img/*']).on('change', reload);
 	if(!gcf.item){
 		gulp.watch(gcf.devDir + '/' + gcf.item + '/*.js', ['webpack']);
 		gulp.watch(gcf.devDir + '/' + gcf.item + '/*.ejs',['ejs']);
@@ -114,6 +101,7 @@ gulp.task('serve',['sass','ejs'],function(){
 	 	gulp.watch(gcf.devDir + '/**/*.scss', ['sass']);
 	}
 });
+
 
 dirs.forEach(function(dir){
 	gulp.task(dir,['clean'],function(){
