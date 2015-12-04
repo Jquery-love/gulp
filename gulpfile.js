@@ -24,11 +24,9 @@ gulp.task('webpack', function (cb) {
 			chunks: false,
 			colors: true
 		}));
-		// plugins.livereload.changed(outPutFile);
 		cb();
 	};
 	var config = require( './'+gcf.devDir + '/'+ gcf.item +'/webpack.config');
-	var outPutFile = path.resolve(config.output.path,config.output.filename);
 	webpack(config,bundle);
 });
 //将scss 文件生成css文件
