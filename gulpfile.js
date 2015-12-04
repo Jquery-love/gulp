@@ -17,8 +17,6 @@ var gcf = {
 	item: options._[0],
 	port: 88
 };
-
-
 var dirs = fs.readdirSync(path.join(__dirname,gcf.devDir));
 
 // gulp.task('jshint', function () {
