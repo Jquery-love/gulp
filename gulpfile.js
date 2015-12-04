@@ -5,6 +5,8 @@ var fs = require('fs');
 var minimist = require('minimist');
 var webpack = require('webpack');
 var plugins = require('gulp-load-plugins')();
+var browserSync = require('browser-sync');
+var reload = browserSync.reload;
 // var runSequence = require('run-sequence');
 var options = minimist(process.argv.slice(2));
 // console.log(options._[0]);
@@ -12,7 +14,8 @@ var gcf = {
 	env : options.env || 'prod',
 	outDir: 'dist',
 	devDir : 'public',
-	item: options._[0]
+	item: options._[0],
+	port: 88
 };
 
 
@@ -33,7 +36,7 @@ gulp.task('webpack', function (cb) {
 			chunks: false,
 			colors: true
 		}));
-		plugins.livereload.changed(outPutFile);
+		// plugins.livereload.changed(outPutFile);
 		cb();
 	};
 	var config = require( './'+gcf.devDir + '/'+ gcf.item +'/webpack.config');
@@ -51,14 +54,15 @@ gulp.task('sass',function(){
 		.pipe(plugins.sass(config).on('error', plugins.sass.logError))
 		.pipe(plugins.autoprefixer('last 2 version', 'safari 5', 'ie 7', 'ie 8', 'ie 9', 'opera 12.1', 'ios 6', 'android 4'))
 		.pipe(gulp.dest(gcf.outDir))
-		.pipe(plugins.livereload())
+		.pipe(reload({stream: true}))
 		.pipe(plugins.notify({message: "css task complete"}));
 });
 
 // 清空图片、样式、js
 gulp.task('clean', function() {
-    gulp.src([gcf.outDir+'/'+ gcf.item +'/css/', gcf.outDir+'/'+ gcf.item +'/js/', gcf.outDir+'/'+ gcf.item +'/img/'], {read: false})
-        .pipe(plugins.clean());
+	var clearDirs = [gcf.outDir+'/'+ gcf.item +'/css/', gcf.outDir+'/'+ gcf.item +'/js/', gcf.outDir+'/'+ gcf.item +'/img/'];
+    return gulp.src(clearDirs, {read: false})
+        .pipe(plugins.clean({force: true}));
 });
 
 gulp.task("fonts",function(){
@@ -76,7 +80,7 @@ gulp.task('ejs',function(){
 			conditionals:true
 		})))
 		.pipe(gulp.dest(gcf.outDir))
-		.pipe(plugins.livereload())
+		.pipe(reload({stream: true}))
 		.pipe(plugins.notify({message: "ejs task complete"}));
 });
 // 图片处理
@@ -84,12 +88,19 @@ gulp.task('img', function(){
     gulp.src(gcf.devDir + '/**/img/*')
         .pipe(plugins.imagemin())
         .pipe(gulp.dest(gcf.outDir))
-        .pipe(plugins.livereload());
 })
-
-// 监视文件的变化
-gulp.task('watch', function () {
-	plugins.livereload.listen();
+gulp.task('serve',['sass','fonts','ejs','webpack'],function(){
+	browserSync({
+		notify: false,
+		port: gcf.port,
+		server:{
+			baseDir:gcf.outDir,
+			routes: {
+		 		"/bower_components": "bower_components"
+		 	}
+		}
+	});
+	gulp.watch([gcf.devDir + '/**/*.js', gcf.devDir + '/**/*.ejs',gcf.devDir + '/**/fonts/*', gcf.devDir + '/**/img/*',gcf.devDir + '/**/*.scss']).on('change', reload);
 	if(!gcf.item){
 		gulp.watch(gcf.devDir + '/' + gcf.item + '/*.js', ['webpack']);
 		gulp.watch(gcf.devDir + '/' + gcf.item + '/*.ejs',['ejs']);
@@ -104,26 +115,14 @@ gulp.task('watch', function () {
 	 	gulp.watch(gcf.devDir + '/**/*.scss', ['sass']);
 	}
 });
-//使用connect启动一个Web服务器
-gulp.task('connect', function () {
-  	plugins.connect.server({
-		root: gcf.outDir,
-		port:88
-  	});
-});
-
 
 dirs.forEach(function(dir){
 	gulp.task(dir,['clean'],function(){
 		if(gcf.env == 'dev'){
-			gulp.start('connect','watch');
-			gulp.start('sass','ejs','img','fonts','webpack');
+			gulp.start('webpack','sass','ejs','img','fonts');
+			gulp.start('serve');
 		}else{
-			gulp.task('default', function(){
-				gulp.start('sass','ejs','img','fonts','webpack')
-			});
+			gulp.start('sass','ejs','img','fonts','webpack')
 		}
 	})
 })
-
-

@@ -38,7 +38,7 @@ module.exports = {
     plugins: plugins,
     //页面入口文件配置
     entry: {
-        index : path.resolve(__dirname,'js/index.js')
+        slide : path.resolve(__dirname,'js/slide.js')
     },
     //入口文件输出配置
     output: {
