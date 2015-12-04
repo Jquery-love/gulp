@@ -38,8 +38,7 @@ module.exports = {
     plugins: plugins,
     //页面入口文件配置
     entry: {
-        app : path.resolve(__dirname,'js/app.js'),
-        controllers : path.resolve(__dirname,'js/controllers.js')
+        index : path.resolve(__dirname,'js/index.js')
     },
     //入口文件输出配置
     output: {

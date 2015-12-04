@@ -57,8 +57,8 @@ gulp.task('sass',function(){
 
 // 清空图片、样式、js
 gulp.task('clean', function() {
-    gulp.src([gcf.outDir+'/'+ gcf.item +'/css', gcf.outDir+'/'+ gcf.item +'/js', gcf.outDir+'/'+ gcf.item +'/img'], {read: false})
-        .pipe(clean());
+    gulp.src([gcf.outDir+'/'+ gcf.item +'/css/', gcf.outDir+'/'+ gcf.item +'/js/', gcf.outDir+'/'+ gcf.item +'/img/'], {read: false})
+        .pipe(plugins.clean());
 });
 
 gulp.task("fonts",function(){
@@ -81,20 +81,28 @@ gulp.task('ejs',function(){
 });
 // 图片处理
 gulp.task('img', function(){
-    var imgSrc = './src/images/**/*',
-        imgDst = './dist/images';
-    gulp.src(imgSrc)
-        .pipe(imagemin())
-        .pipe(livereload(server))
-        .pipe(gulp.dest(imgDst));
+    gulp.src(gcf.devDir + '/**/img/*')
+        .pipe(plugins.imagemin())
+        .pipe(gulp.dest(gcf.outDir))
+        .pipe(plugins.livereload());
 })
 
 // 监视文件的变化
 gulp.task('watch', function () {
 	plugins.livereload.listen();
-	gulp.watch(gcf.devDir + '/**/*.js', ['webpack']);
-	gulp.watch(gcf.devDir + '/**/*.ejs',['ejs']);
- 	gulp.watch(gcf.devDir + '/**/*.scss', ['sass']);
+	if(!gcf.item){
+		gulp.watch(gcf.devDir + '/' + gcf.item + '/*.js', ['webpack']);
+		gulp.watch(gcf.devDir + '/' + gcf.item + '/*.ejs',['ejs']);
+		gulp.watch(gcf.devDir + '/' + gcf.item + '/fonts/*',['fonts']);
+		gulp.watch(gcf.devDir + '/' + gcf.item + '/img/*',['img']);
+	 	gulp.watch(gcf.devDir + '/' + gcf.item + '/*.scss', ['sass']);
+	}else{
+		gulp.watch(gcf.devDir + '/**/*.js', ['webpack']);
+		gulp.watch(gcf.devDir + '/**/*.ejs',['ejs']);
+		gulp.watch(gcf.devDir + '/**/fonts/*',['fonts']);
+		gulp.watch(gcf.devDir + '/**/img/*',['img']);
+	 	gulp.watch(gcf.devDir + '/**/*.scss', ['sass']);
+	}
 });
 //使用connect启动一个Web服务器
 gulp.task('connect', function () {
@@ -104,16 +112,18 @@ gulp.task('connect', function () {
   	});
 });
 
-dirs.forEach(function(dir){
-	gulp.task(dir,function(){
-		var folder_exists = fs.existsSync(path.join(__dirname,gcf.devDir,gcf.item,'fonts'));
 
-		folder_exists && gulp.start('fonts');
-		gulp.start('connect');
-		gulp.start('watch');
+dirs.forEach(function(dir){
+	gulp.task(dir,['clean'],function(){
+		if(gcf.env == 'dev'){
+			gulp.start('connect','watch');
+			gulp.start('sass','ejs','img','fonts','webpack');
+		}else{
+			gulp.task('default', function(){
+				gulp.start('sass','ejs','img','fonts','webpack')
+			});
+		}
 	})
 })
 
-gulp.task('default', function(){
-	gulp.start('sass','ejs','img','webpack')
-});
+
