@@ -9,14 +9,14 @@ var browserSync = require('browser-sync');
 var reload = browserSync.reload;
 var options = minimist(process.argv.slice(2));
 var gcf = {
-	env : options.env || 'prod',
-	outDir: 'dist',
-	devDir : 'public',
-	item: options._[0],
-	port: 88
+	env 	: options.env || 'dev',
+	outDir	: 'dist',
+	devDir 	: 'public',
+	item	: options._[0],
+	port	: 88
 };
+gcf.wpkDir = './'+gcf.devDir + '/'+ gcf.item +'/webpack.config.js';
 var dirs = fs.readdirSync(path.join(__dirname,gcf.devDir));
-
 gulp.task('webpack', function (cb) {
 	var bundle = function(err, stats){
 		if(err) throw new plugins.util.PluginError("webpack", err);
@@ -26,14 +26,29 @@ gulp.task('webpack', function (cb) {
 		}));
 		cb();
 	};
-	var config = require( './'+gcf.devDir + '/'+ gcf.item +'/webpack.config');
-	webpack(config,bundle);
+	fs.exists(gcf.wpkDir,function(exists){
+		if(exists){
+			webpack(require(gcf.wpkDir),bundle);
+			gulp.watch([gcf.outDir + '/**/js/*.js']).on('change', reload);
+		}else{
+			gulp.start('js')
+		}
+		// exists ? webpack(require(gcf.wpkDir),bundle) : gulp.start('js');
+	});
+});
+gulp.task('js',function(){
+	return gulp.src([gcf.devDir + '/**/js/*.js',gcf.devDir + '/**/js/**/*.js'])
+		.pipe(plugins.changed(gcf.outDir,{extension : '.js'}))
+		.pipe(plugins.if(gcf.env!='dev',plugins.uglify()))
+		.pipe(gulp.dest(gcf.outDir))
+		.pipe(reload({stream: true}))
+		.pipe(plugins.notify({message: "js task complete <%= file.relative %>"}));
 });
 //将scss 文件生成css文件
 gulp.task('sass',function(){
 	var config = {};
-	if(gcf.env == 'dev'){config.sourceComments = 'map';config.errLogToConsole = true;}
-	else if(gcf.env == 'prod'){config.outputStyle = 'compressed';}
+	// if(gcf.env == 'dev'){config.sourceComments = 'map';config.errLogToConsole = true;config.outputStyle = 'compact';}
+	config.outputStyle = 'compressed';
 	return gulp.src([gcf.devDir + '/**/css/[^_]*.scss','!' + gcf.devDir +'/**/?parts/[^_]*.scss'])
 		.pipe(plugins.changed(gcf.outDir,{extension : '.css'}))
 		.pipe(plugins.sass(config).on('error', plugins.sass.logError))
@@ -52,6 +67,7 @@ gulp.task('clean', function() {
 
 gulp.task("fonts",function(){
 	return gulp.src(gcf.devDir + '/**/fonts/*')
+		.pipe(plugins.changed(gcf.outDir))
 		.pipe(gulp.dest(gcf.outDir));
 })
 
@@ -60,7 +76,7 @@ gulp.task('ejs',function(){
 	return gulp.src([gcf.devDir + '/**/[^_]*.ejs','!'+ gcf.devDir + '/**/?parts/[^_]*.ejs'])
 		.pipe(plugins.changed(gcf.outDir,{extension: '.html'}))
 		.pipe(plugins.ejs({},{ext: '.html'}))
-		.pipe(plugins.if(gcf.env=='prod',plugins.minifyHtml({
+		.pipe(plugins.if(gcf.env!='dev',plugins.minifyHtml({
 			quotes:true,
 			conditionals:true
 		})))
@@ -70,34 +86,38 @@ gulp.task('ejs',function(){
 });
 // 图片处理
 gulp.task('img', function(){
-    gulp.src(gcf.devDir + '/**/img/*')
-        .pipe(plugins.imagemin())
+    gulp.src([gcf.devDir + '/**/img/**/*.@(png|jpg|jpeg|gif)',gcf.devDir + '/**/img/*.@(png|jpg|jpeg|gif)'])
+    	.pipe(plugins.changed(gcf.outDir))
+        // .pipe(plugins.imagemin())
         .pipe(gulp.dest(gcf.outDir))
+        .pipe(reload({stream: true}))
+        .pipe(plugins.notify({message: "img task complete"}));
 })
 gulp.task('serve',['sass','ejs'],function(){
 	browserSync({
-		notify: false,
 		port: gcf.port,
 		open: false,
 		server:{
 			baseDir:gcf.outDir,
 			directory:true
-		}
+		},
+		online: true
 	});
-	gulp.watch([gcf.outDir + '/**/*.js',gcf.outDir + '/**/fonts/*', gcf.outDir + '/**/img/*']).on('change', reload);
-	if(!gcf.item){
-		gulp.watch(gcf.devDir + '/' + gcf.item + '/*.js', ['webpack']);
-		gulp.watch(gcf.devDir + '/' + gcf.item + '/*.ejs',['ejs']);
-		gulp.watch(gcf.devDir + '/' + gcf.item + '/fonts/*',['fonts']);
-		gulp.watch(gcf.devDir + '/' + gcf.item + '/img/*',['img']);
-	 	gulp.watch(gcf.devDir + '/' + gcf.item + '/*.scss', ['sass']);
-	}else{
-		gulp.watch(gcf.devDir + '/**/*.js', ['webpack']);
-		gulp.watch(gcf.devDir + '/**/*.ejs',['ejs']);
-		gulp.watch(gcf.devDir + '/**/fonts/*',['fonts']);
-		gulp.watch(gcf.devDir + '/**/img/*',['img']);
-	 	gulp.watch(gcf.devDir + '/**/*.scss', ['sass']);
-	}
+	gulp.watch([gcf.outDir + '/**/fonts/**']).on('change', reload);
+
+	fs.exists(gcf.wpkDir,function(exists){
+		if(exists){
+			gulp.watch(gcf.devDir + '/**/js/**', ['webpack']);
+		}else{
+			gulp.watch(gcf.devDir + '/**/js/**', ['js']);
+		}
+		// exists ? webpack(require(gcf.wpkDir),bundle) : gulp.start('js');
+	});
+	gulp.watch(gcf.devDir + '/**/html/**',['ejs']);
+	gulp.watch(gcf.devDir + '/**/fonts/**',['fonts']);
+	gulp.watch(gcf.devDir + '/**/img/**',['img']);
+ 	gulp.watch(gcf.devDir + '/**/css/**', ['sass']);
+	
 });
 
 

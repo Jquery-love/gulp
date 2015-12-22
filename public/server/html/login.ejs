@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="ionicLogin">
+    <head>
+        <meta charset="UTF-8">
+        <title>登录</title>
+         <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+        <link rel="shortcut icon" href="../img/favicon.ico" />
+        <link rel="stylesheet" href="../../lib/css/ionic.css"/>
+        <link rel="stylesheet" href="../css/login.css">
+    </head>
+    <body>
+        <div class="bar bar-header bar-dark">
+            <!--<button class="button button-icon icon ion-chevron-left"></button>-->
+            <h1 class="title">登录</h1>
+        </div>
+        <div class="scroll-content ionic-scroll has-header">
+            <div class="logo">
+                <div class="logo-icon"><img src="../img/_sprites/icon_logo.png" alt=""></div>
+            </div>
+            <div class="loginForm">
+                <div class="list list-inset">
+                    <label class="item item-input">
+                        <i class="icon ion-person placeholder-icon"></i>
+                        <input type="text" placeholder="手机 / 昵称 / 账号">
+                    </label>
+                    <label class="item item-input">
+                        <i class="icon ion-locked placeholder-icon"></i>
+                        <input type="password" placeholder="密码">
+                        <i class="icon ion-eye-disabled placeholder-icon hide-show-pass"></i>
+                    </label>
+                </div>
+                <div class="form-tip">
+                    <div class="error-tip">用户名或密码错误，请重新输入</div>
+                </div>
+                <div class="btns">
+                    <button class="button button-block button-assertive subing" id="login-submit">登陆<i></i></button>
+                    <button class="button button-block button-stable" onclick="location.href='register.html';">注册新账号</button>
+                </div>
+            </div>
+        </div>
+        <script src="../js/plugins.js"></script>
+        <script src="../js/login.js"></script>
+    </body>
+</html>

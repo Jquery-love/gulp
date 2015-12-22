@@ -1,0 +1,55 @@
+@charset "UTF-8";
+// Options
+//
+// Quickly modify global styling by enabling or disabling optional features.
+
+$enable-flex:               false !default;
+$enable-rounded:            true !default;
+$enable-shadows:            true !default;
+$enable-gradients:          true !default;
+$enable-transitions:        true !default;
+$enable-hover-media-query:  false !default;
+
+
+$gray-dark:                 #373a3c !default;
+$gray:                      #55595c !default;
+$gray-light:                #818a91 !default;
+$gray-lighter:              #eceeef !default;
+$gray-lightest:             #f7f7f9 !default;
+
+$brand-primary:             #0275d8 !default;
+$brand-success:             #5cb85c !default;
+$brand-info:                #5bc0de !default;
+$brand-warning:             #f0ad4e !default;
+$brand-danger:              #d9534f !default;
+
+$body-bg:                    #fff !default;
+$body-color:                 $gray-dark !default;
+$base-color:                 #000 !default;
+// Typography
+//
+// Font, line-height, and color for body text, headings, and more.
+
+$YH : 'Microsoft YaHei';
+$font-family-sans-serif:     "Helvetica Neue", Helvetica, Arial, sans-serif !default;
+$font-family-serif:          Georgia, "Times New Roman", Times, serif !default;
+$font-family-monospace:      Menlo, Monaco, Consolas, "Courier New", monospace !default;
+$font-family-base:           $YH,$font-family-sans-serif !default;
+$font-size-root:             	12px !default;
+$font-size-base:             	1rem !default;
+$font-size-large:               18px !default;
+$font-size-small:               11px !default;
+
+$line-height:                	1.5 !default;
+$line-height-base:              1.428571429 !default; // 20/14
+$line-height-computed:          floor($font-size-base * $line-height) !default; // ~20px
+
+// Links
+//
+// Style anchor elements.
+
+$link-color:                 $brand-primary !default;
+$link-hover-color:           darken($link-color, 15%) !default;
+$link-hover-decoration:      underline !default;
+
+$max-device-width:			640px;

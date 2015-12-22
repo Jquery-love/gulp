@@ -1,0 +1,19 @@
+@import '_parts/_common';
+
+.user-wrap{margin-top:20px;border-top:2px solid #BCB0A3;border-bottom:1px solid #DFD6CC;padding-left:15px;font-size:1.3rem;background-color: #fff;
+	.user-title{padding:10px 0;border-bottom:1px solid #DFD6CC;color:#282828;}
+	.user-content{padding:10px;
+		&.overflow-scroll{top:240px;} 
+		&.about-desc{color: #908b85;}
+		&.ctat-desc{
+			&.overflow-scroll{position: relative;}
+			.ctat-row{padding-left:45px;position: relative;
+				&:first-child .ctat-info{border-top:0;
+					strong{font-size:24px;font-weight: normal;}
+				}
+				.ctat-tit{position: absolute;left:0;color:#dad0c5; }
+				.ctat-info{border-top:1px solid #DFD6CC;padding:10px 0 20px 5px;color:#88837d;}
+			}
+		}
+	}
+}

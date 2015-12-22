@@ -38,7 +38,8 @@ module.exports = {
     plugins: plugins,
     //页面入口文件配置
     entry: {
-        index : path.resolve(__dirname,'js/index.js')
+        login : path.resolve(__dirname,'js/login.js'),
+        plugins:path.resolve(__dirname,'js/')
     },
     //入口文件输出配置
     output: {
@@ -53,25 +54,23 @@ module.exports = {
     module: {
         //加载器配置
         loaders: [
-            // { test: /\.css$/, loader: 'style-loader!css-loader' },
-            // { test: /\.js$/, loader: 'jsx-loader?harmony' },
-            // { test: /\.scss$/, loader: 'style!css!sass?sourceMap'},
-            // { test: /\.(png|jpg)$/, loader: 'url-loader?limit=8192'}
+            // { test: /\.js$/, loader: 'jsx-loader?harmony' }
         ]
     },
     externals: {
-        'jquery': 'jQuery'
+        // 'jquery': 'jQuery'
     },
     //其它解决方案配置
     resolve: {
         // root: 'E:/github/flux-example/src', //绝对路径
-        extensions: ['', '.js', '.json', '.scss']
-        // alias: {
-        //     AppStore : 'js/stores/AppStores.js',
-        //     ActionType : 'js/actions/ActionType.js',
-        //     AppAction : 'js/actions/AppAction.js'
-        // }
+        extensions: ['', '.js', '.json']
+        alias: {
+            ionic : '../../lib/js/ionic/ionic.bundle.min.js'
+            // ActionType : 'js/actions/ActionType.js',
+            // AppAction : 'js/actions/AppAction.js'
+        }
     },
+    noParse:['/ionic/'],
     debug: DEBUG,
     cache: DEBUG,
     devtool:DEBUG ? '#eval' : false

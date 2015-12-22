@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="ionicLogin">
+    <head>
+        <meta charset="UTF-8">
+        <title>注册</title>
+         <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+        <link rel="stylesheet" href="../../lib/css/ionic.css"/>
+        <link rel="stylesheet" href="../css/register.css">
+    </head>
+    <body>
+        <div class="bar bar-header bar-dark">
+            <button class="button button-icon icon ion-chevron-left" onclick="location.href='login.html'"></button>
+            <h1 class="title">注册</h1>
+        </div>
+        <div class="scroll-content ionic-scroll has-header">
+            <div class="logo">
+                <div class="logo-icon"><img src="../img/_sprites/icon_logo.png" alt=""></div>
+            </div>
+            <div class="loginForm">
+                <div class="list list-inset">
+                    <label class="item item-input">
+                        <input type="text" placeholder="手机号" id="user_pn" value="18516602969">
+                    </label>
+                    <label class="item item-input">
+                        <input type="text" placeholder="验证码" id="captchaCode" value="111111">
+                        <button class="button button-small button-assertive" id="getCode">获取验证码</button>
+                    </label>
+                    <label class="item item-input">
+                        <input type="text" placeholder="昵称" id="user_nickname" value="steven">
+                    </label>
+                    <label class="item item-input">
+                        <input type="password" placeholder="密码" id="user_password" value="1111aaaa">
+                        <i class="icon ion-eye-disabled placeholder-icon hide-show-pass"></i>
+                    </label>
+                </div>
+                <div class="form-tip">
+                    <div class="error-tip">验证码有误，请重新输入</div>
+                </div>
+                <div class="btns">
+                    <button class="button button-block button-assertive subing" id="register-submit">注册<i></i></button>
+                </div>
+                <div class="form-clause">
+                    <p>同意赵涌在线<a href="javascript:;">《服务条款》</a></p>
+                </div>
+            </div>
+        </div>
+        <script src="../js/plugins.js"></script>
+        <script src="../js/login.js"></script>
+    </body>
+</html>

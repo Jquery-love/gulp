@@ -1,51 +1,17 @@
-/* line 1, stdin */
-.jcarousel-wrapper {
-  position: relative;
-  background-color: #000; }
+/* line 1, stdin */ .jcarousel-wrapper { position: relative; background-color: #000; }
 
-/* line 2, stdin */
-.jcarousel {
-  position: relative;
-  overflow: hidden; }
+/* line 2, stdin */ .jcarousel { position: relative; overflow: hidden; }
 
-/* line 3, stdin */
-.jcarousel ul {
-  width: 20000em;
-  position: relative;
-  list-style: none;
-  margin: 0;
-  padding: 0; }
+/* line 3, stdin */ .jcarousel ul { width: 20000em; position: relative; list-style: none; margin: 0; padding: 0; }
 
-/* line 4, stdin */
-.jcarousel li {
-  float: left; }
+/* line 4, stdin */ .jcarousel li { float: left; }
 
-/* line 5, stdin */
-.jcarousel-control-prev, .jcarousel-control-next {
-  position: absolute;
-  top: 50%;
-  margin-top: -45px;
-  width: 35px;
-  height: 90px;
-  text-align: center;
-  background: #4E443C;
-  color: #fff;
-  text-decoration: none;
-  font: 70px/80px Arial, sans-serif; }
+/* line 5, stdin */ .jcarousel-control-prev, .jcarousel-control-next { position: absolute; top: 50%; margin-top: -45px; width: 35px; height: 90px; text-align: center; background: #4E443C; color: #fff; text-decoration: none; font: 70px/80px Arial, sans-serif; }
 
-/* line 6, stdin */
-.jcarousel-control-prev {
-  left: -35px; }
+/* line 6, stdin */ .jcarousel-control-prev { left: -35px; }
 
-/* line 7, stdin */
-.jcarousel-control-next {
-  right: -35px; }
+/* line 7, stdin */ .jcarousel-control-next { right: -35px; }
 
-/* line 8, stdin */
-.jcarousel-control-prev:hover span, .jcarousel-control-next:hover span {
-  display: block; }
+/* line 8, stdin */ .jcarousel-control-prev:hover span, .jcarousel-control-next:hover span { display: block; }
 
-/* line 9, stdin */
-.jcarousel-control-prev.inactive, .jcarousel-control-next.inactive {
-  opacity: .5;
-  cursor: default; }
+/* line 9, stdin */ .jcarousel-control-prev.inactive, .jcarousel-control-next.inactive { opacity: .5; cursor: default; }

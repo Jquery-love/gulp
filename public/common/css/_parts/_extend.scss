@@ -1,0 +1,38 @@
+@charset "UTF-8";
+.fade {
+  opacity: 0;
+  transition: opacity .15s linear;
+
+  &.in {
+    opacity: 1;
+  }
+}
+
+.collapse {
+  display: none;
+
+  &.in {
+    display: block;
+  }
+  // tr&.in    { display: table-row; }
+  // tbody&.in { display: table-row-group; }
+}
+
+.collapsing {
+  position: relative;
+  height: 0;
+  overflow: hidden;
+  transition-timing-function: ease;
+  transition-duration: .35s;
+  transition-property: height;
+}
+
+.ib{
+  display:inline-block;
+  zoom:1;
+  *display:inline;
+}
+
+.cf { @include clearfix(); }
+.l{float:left;}
+.r{float:right;}

@@ -1,0 +1,9 @@
+@charset "UTF-8";
+@import '_parts/variables';
+@import '_parts/_fn';
+@import '_parts/_mixin';
+@import '_parts/_extend';
+@import '_parts/_pc_reset';
+.img-responsive {
+  @include img-responsive();
+}

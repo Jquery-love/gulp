@@ -1,15 +1,10 @@
 var ionic = require('ionic');
-angular.module('ionicApp', ['ionic'])
-
-.controller('RootCtrl', function($scope) {
+angular.module('ionicApp', ['ionic']).controller('RootCtrl', function($scope) {
   $scope.onControllerChanged = function(oldController, oldIndex, newController, newIndex) {
     console.log('Controller changed', oldController, oldIndex, newController, newIndex);
     console.log(arguments);
   };
-})
-
-
-.controller('HomeCtrl', function($scope, $timeout, $ionicModal, $ionicActionSheet) {
+}).controller('HomeCtrl', function($scope, $timeout, $ionicModal, $ionicActionSheet) {
   $scope.items = [];
 
   $ionicModal.fromTemplateUrl('newTask.html', function(modal) {
