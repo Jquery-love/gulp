@@ -1,9 +1,38 @@
-.jcarousel-wrapper {position: relative;background-color:#000;}
+@import '../../common/css/_parts/_variables';
+@import '../../common/css/_parts/_mixin';
+@import '../../common/css/_parts/_extend';
+.jcarousel-wrapper {position: relative;background-color:#fff;}
 .jcarousel { position: relative; overflow: hidden; }
 .jcarousel ul { width: 20000em; position: relative; list-style: none; margin: 0; padding: 0; }
 .jcarousel li { float: left; }
-.jcarousel-control-prev, .jcarousel-control-next { position: absolute; top: 50%;margin-top:-45px; width:35px; height: 90px; text-align: center; background: #4E443C; color: #fff; text-decoration: none;font:70px/80px Arial, sans-serif;}
-.jcarousel-control-prev { left: -35px; }
-.jcarousel-control-next { right: -35px; }
+.jcarousel-control-prev, .jcarousel-control-next { position: absolute; top: 50%;margin-top:-45px; width:35px; height: 90px; text-align: center;@include transparent(#000,0.5); color: #fff; text-decoration: none;font:70px/80px Arial, sans-serif;}
+.jcarousel-control-prev { left: -21px; }
+.jcarousel-control-next { right: -21px; }
 .jcarousel-control-prev:hover span, .jcarousel-control-next:hover span { display: block; }
 .jcarousel-control-prev.inactive, .jcarousel-control-next.inactive { opacity: .5; cursor: default; }
+
+
+.listOuter{width:960px; height:356px;
+	.jcarousel{margin-left:-12px;}
+}
+.listBar{
+	.remenUnit{border:1px solid #ced5da;background-color:#fff;width:180px;margin-left:12px;float:left;font-size:12px;
+		.rm_img{font-size:0;
+			img{max-height:100%;max-width:100%;}
+		}
+		.rm_title{padding:5px 15px;
+			a{@include ellipsis(35px,2);height:35px;font-size:14px;color:#333;}
+		}
+		.rm_price,.rm_px{padding:15px 15px 0;}
+		.rm_price{
+			.l{font-weight: bold;}
+			b{color:#f3463e;}
+		}
+		.rm_dateBox{border-top:1px solid #e8ebee;margin:5px 15px 0;position: relative;padding:10px 0;
+			.rm_icon{color:#333;}
+			b{font-weight: normal;color:#f45851;}
+			.rm_date{font-size:12px;color:#aaa;}
+		}
+	}
+
+}

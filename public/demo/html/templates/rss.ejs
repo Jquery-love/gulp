@@ -1,0 +1,51 @@
+<!-- <div class="bar bar-header rss">
+  <div class="buttons">
+    <a class="button" href="#/set">设置</a>
+  </div>
+  <h1 class="title">订阅</h1>
+  <div class="buttons">
+    <a class="button" href="#/filter"> 筛选 </a>
+  </div>
+</div> -->
+<div class="bar bar-subheader rss-btns">
+  <div class="button-bar">
+    <a class="button" ng-class="{'now':type == '1'}" ng-click="showList(1)">
+      预览<sup>8</sup>
+    </a>
+    <a class="button" ng-class="{'now':type == '2'}" ng-click="showList(2)">
+      竞价<sup>8888</sup>
+    </a>
+    <a class="button" ng-class="{'now':type == '3'}" ng-click="showList(3)">
+      定价<sup>8</sup>
+    </a>
+    <a class="button" ng-class="{'now':type == '4'}" ng-click="showList(4)">
+      成交<sup>8</sup>
+    </a>
+  </div>
+</div>
+<ion-view view-title="订阅" class="rss">
+  <ion-nav-buttons side="left">
+    <a class="button button-clear no-animation" href="#/set"> 设置 </a>
+  </ion-nav-buttons>
+  <ion-nav-buttons side="right"> 
+    <a class="button button-clear no-animation" href="#/filter"> 筛选 </a>
+  </ion-nav-buttons>
+    <!-- <div class="rss-tabs tabs">
+      <a class="tab-item" ng-click="">预览<sup>8</sup></a>
+      <a class="tab-item">竞价<sup>8888</sup></a>
+      <a class="tab-item">定价<sup>0</sup></a>
+      <a class="tab-item">成交<sup>8888</sup></a>
+    </div> -->
+  <ion-content>
+    <ion-refresher on-refresh="doRefresh()"></ion-refresher>
+    <div class="rssList" ng-repeat="item in rssData">
+      <div class="item item-thumbnail-left">
+        <a class="item-img imgc" href="{{item.url}}"><img class="imge" src="{{item.imgUrl}}"></a>
+        <a class="item-title">{{item.title}}</a>
+        <p class="item-sec cf"><time class="l">{{item.time}}</time> <a class="r" href="{{item.stampUrl}}">评级邮票</a></p>
+        <p class="item-sec">{{item.shopName}}</p>
+        <p class="item-sec">&yen; <strong class="price">{{item.price}}</strong><a href="javascript:;" class="atten-btn"></a></p>
+      </div>
+    </div>
+  </ion-content>
+</ion-view>

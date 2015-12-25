@@ -1,87 +1,87 @@
-/* line 1, E:/project/static-web/public/user/css/_parts/_common.scss */ html { font-family: sans-serif; -webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%; }
+html { font-family: sans-serif; -webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%; }
 
-/* line 7, E:/project/static-web/public/user/css/_parts/_common.scss */ body { margin: 0; }
+body { margin: 0; }
 
-/* line 11, E:/project/static-web/public/user/css/_parts/_common.scss */ article, aside, details, figcaption, figure, footer, header, hgroup, main, menu, nav, section, summary { display: block; }
+article, aside, details, figcaption, figure, footer, header, hgroup, main, menu, nav, section, summary { display: block; }
 
-/* line 15, E:/project/static-web/public/user/css/_parts/_common.scss */ audio, canvas, progress, video { display: inline-block; vertical-align: baseline; }
+audio, canvas, progress, video { display: inline-block; vertical-align: baseline; }
 
-/* line 20, E:/project/static-web/public/user/css/_parts/_common.scss */ audio:not([controls]) { display: none; height: 0; }
+audio:not([controls]) { display: none; height: 0; }
 
-/* line 25, E:/project/static-web/public/user/css/_parts/_common.scss */ [hidden], template { display: none; }
+[hidden], template { display: none; }
 
-/* line 29, E:/project/static-web/public/user/css/_parts/_common.scss */ a { background-color: transparent; }
+a { background-color: transparent; }
 
-/* line 33, E:/project/static-web/public/user/css/_parts/_common.scss */ a:active, a:hover { outline: 0; }
+a:active, a:hover { outline: 0; }
 
-/* line 37, E:/project/static-web/public/user/css/_parts/_common.scss */ abbr[title] { border-bottom: 1px dotted; }
+abbr[title] { border-bottom: 1px dotted; }
 
-/* line 41, E:/project/static-web/public/user/css/_parts/_common.scss */ b, strong { font-weight: 700; }
+b, strong { font-weight: 700; }
 
-/* line 45, E:/project/static-web/public/user/css/_parts/_common.scss */ dfn { font-style: italic; }
+dfn { font-style: italic; }
 
-/* line 49, E:/project/static-web/public/user/css/_parts/_common.scss */ h1 { margin: .67em 0; font-size: 2em; }
+h1 { margin: .67em 0; font-size: 2em; }
 
-/* line 54, E:/project/static-web/public/user/css/_parts/_common.scss */ mark { color: #000; background: #ff0; }
+mark { color: #000; background: #ff0; }
 
-/* line 59, E:/project/static-web/public/user/css/_parts/_common.scss */ small { font-size: 80%; }
+small { font-size: 80%; }
 
-/* line 63, E:/project/static-web/public/user/css/_parts/_common.scss */ sub, sup { position: relative; font-size: 75%; line-height: 0; vertical-align: baseline; }
+sub, sup { position: relative; font-size: 75%; line-height: 0; vertical-align: baseline; }
 
-/* line 70, E:/project/static-web/public/user/css/_parts/_common.scss */ sup { top: -.5em; }
+sup { top: -.5em; }
 
-/* line 74, E:/project/static-web/public/user/css/_parts/_common.scss */ sub { bottom: -.25em; }
+sub { bottom: -.25em; }
 
-/* line 78, E:/project/static-web/public/user/css/_parts/_common.scss */ img { border: 0; }
+img { border: 0; }
 
-/* line 82, E:/project/static-web/public/user/css/_parts/_common.scss */ svg:not(:root) { overflow: hidden; }
+svg:not(:root) { overflow: hidden; }
 
-/* line 86, E:/project/static-web/public/user/css/_parts/_common.scss */ figure { margin: 1em 40px; }
+figure { margin: 1em 40px; }
 
-/* line 90, E:/project/static-web/public/user/css/_parts/_common.scss */ hr { height: 0; box-sizing: content-box; }
+hr { height: 0; box-sizing: content-box; }
 
-/* line 97, E:/project/static-web/public/user/css/_parts/_common.scss */ pre { overflow: auto; }
+pre { overflow: auto; }
 
-/* line 101, E:/project/static-web/public/user/css/_parts/_common.scss */ code, kbd, pre, samp { font-family: monospace,monospace; font-size: 1em; }
+code, kbd, pre, samp { font-family: monospace,monospace; font-size: 1em; }
 
-/* line 106, E:/project/static-web/public/user/css/_parts/_common.scss */ button, input, optgroup, select, textarea { margin: 0; font: inherit; color: inherit; }
+button, input, optgroup, select, textarea { margin: 0; font: inherit; color: inherit; }
 
-/* line 112, E:/project/static-web/public/user/css/_parts/_common.scss */ button { overflow: visible; }
+button { overflow: visible; }
 
-/* line 116, E:/project/static-web/public/user/css/_parts/_common.scss */ button, select { text-transform: none; }
+button, select { text-transform: none; }
 
-/* line 120, E:/project/static-web/public/user/css/_parts/_common.scss */ button, html input[type=button], input[type=reset], input[type=submit] { -webkit-appearance: button; cursor: pointer; }
+button, html input[type=button], input[type=reset], input[type=submit] { -webkit-appearance: button; cursor: pointer; }
 
-/* line 125, E:/project/static-web/public/user/css/_parts/_common.scss */ button[disabled], html input[disabled] { cursor: default; }
+button[disabled], html input[disabled] { cursor: default; }
 
-/* line 129, E:/project/static-web/public/user/css/_parts/_common.scss */ button::-moz-focus-inner, input::-moz-focus-inner { padding: 0; border: 0; }
+button::-moz-focus-inner, input::-moz-focus-inner { padding: 0; border: 0; }
 
-/* line 134, E:/project/static-web/public/user/css/_parts/_common.scss */ input { line-height: normal; }
+input { line-height: normal; }
 
-/* line 138, E:/project/static-web/public/user/css/_parts/_common.scss */ input[type=checkbox], input[type=radio] { box-sizing: border-box; padding: 0; }
+input[type=checkbox], input[type=radio] { box-sizing: border-box; padding: 0; }
 
-/* line 145, E:/project/static-web/public/user/css/_parts/_common.scss */ input[type=number]::-webkit-inner-spin-button, input[type=number]::-webkit-outer-spin-button { height: auto; }
+input[type=number]::-webkit-inner-spin-button, input[type=number]::-webkit-outer-spin-button { height: auto; }
 
-/* line 149, E:/project/static-web/public/user/css/_parts/_common.scss */ input[type=search] { box-sizing: content-box; -webkit-appearance: textfield; }
+input[type=search] { box-sizing: content-box; -webkit-appearance: textfield; }
 
-/* line 156, E:/project/static-web/public/user/css/_parts/_common.scss */ input[type=search]::-webkit-search-cancel-button, input[type=search]::-webkit-search-decoration { -webkit-appearance: none; }
+input[type=search]::-webkit-search-cancel-button, input[type=search]::-webkit-search-decoration { -webkit-appearance: none; }
 
-/* line 160, E:/project/static-web/public/user/css/_parts/_common.scss */ fieldset { padding: .35em .625em .75em; margin: 0 2px; border: 1px solid silver; }
+fieldset { padding: .35em .625em .75em; margin: 0 2px; border: 1px solid silver; }
 
-/* line 166, E:/project/static-web/public/user/css/_parts/_common.scss */ legend { padding: 0; border: 0; }
+legend { padding: 0; border: 0; }
 
-/* line 171, E:/project/static-web/public/user/css/_parts/_common.scss */ textarea { overflow: auto; }
+textarea { overflow: auto; }
 
-/* line 175, E:/project/static-web/public/user/css/_parts/_common.scss */ optgroup { font-weight: 700; }
+optgroup { font-weight: 700; }
 
-/* line 179, E:/project/static-web/public/user/css/_parts/_common.scss */ table { border-spacing: 0; border-collapse: collapse; }
+table { border-spacing: 0; border-collapse: collapse; }
 
-/* line 184, E:/project/static-web/public/user/css/_parts/_common.scss */ td, th { padding: 0; }
+td, th { padding: 0; }
 
-/* line 2, stdin */ body { background: #f5f5f5; background: url("../img/baidu_jgylogo3.gif") no-repeat 0 0; }
+body { background: #f5f5f5; background: url("../img/baidu_jgylogo3.gif") no-repeat 0 0; }
 
-/* line 4, stdin */ body ul { padding: 0; }
+body ul { padding: 0; }
 
-/* line 5, stdin */ body ul li { padding: 5px 0; color: red; border-bottom: 1px solid #fff; }
+body ul li { padding: 5px 0; color: red; border-bottom: 1px solid #fff; }
 
-/* line 6, stdin */ body ul li:after { content: ''; width: 10px; height: 10px; border: 1px solid #000; background-color: red; display: inline-block; }
+body ul li:after { content: ''; width: 10px; height: 10px; border: 1px solid #000; background-color: red; display: inline-block; }

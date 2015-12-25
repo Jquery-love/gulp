@@ -1,0 +1,54 @@
+@import '../../common/css/_parts/_variables';
+@import '../../common/css/_parts/_mixin';
+@import '../../common/css/_parts/_extend';
+img{@include img-responsive();}
+.rss{
+	&.bar-header{background-color: #282828;
+		.title{color:#fff;}
+		.button{background-color:transparent;color:#fff;border:0;
+
+		}
+	}
+	&.pane{padding-top:90px;}
+	.scroll-content{top:94px;}
+}
+.rss-btns{position:relative;padding:0 5%;background-color:#EEEEEE;border-color:#EEEEEE;line-height:50px;height:50px;
+	.button-bar{
+		.button{position:relative;overflow:visible;font-size:16px;border:0;background-color:transparent;line-height:50px;min-height:0;
+			&.activated,&.now{color:#006996;}
+		}	
+	}
+	sup{@include absolute(top 15px left 62px);}
+	
+}
+.rssList{.item{&.item-thumbnail-left{padding-top:16px;padding-left:116px;min-height:128px;
+			.item-img{position:absolute;top:18px;left:10px;max-width:90px;max-height:90px;width:100%;height:100%;}
+			.item-title{color:#000;font-weight: bold;font-size:18px;@include ellipsis(44px,2);line-height:1.3;}
+			.item-sec{padding-top:5px;
+				.atten-btn{background:transparent url('../img/atten.png') left top no-repeat;@include background-size(100%);@include ib();@include size(32px,25px);@include absolute(right 15px);}
+			}
+
+			a{text-decoration: none;color:#333;}
+			strong{font-size:18px;font-weight: normal;}
+		}
+	}
+}
+
+.loading-container .loading{background-color: transparent;@include center-block();
+	.spinner svg{@include size(100px,100px);}
+}
+
+.filter{
+	.item{padding:10px;margin:-1px 0 -1px 0;
+		&.item-divider{padding-top:8px;padding-bottom:8px;background-color: #eee;}
+		&.button-bar{
+			.button{min-height:35px;line-height:35px;border-width:0 2px 0 0;border-color:#fff;background-color: #EEEEEE;}
+		}
+	}
+}
+.set{
+	.menu{width:100px;
+		.scroll-content{padding-left:0;}
+	}
+	.scroll-content{padding-left:100px;}
+}

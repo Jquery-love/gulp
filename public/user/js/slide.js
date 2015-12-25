@@ -2,7 +2,7 @@ require('../../lib/js/jquery.jcarousel.min.js');
 $('.jcarousel').jcarousel({
 	wrap:'circular'
 }).jcarouselAutoscroll({
-	interval: 3000
+	interval: 300000
 });
 $('.jcarousel-control-prev')
 	.on('jcarouselcontrol:active', function() {

@@ -316,7 +316,13 @@ CSS output:
     }
   }
 }
-
+// transparent mixin
+@mixin transparent($color, $alpha) {
+  $rgba: rgba($color, $alpha);
+  $ie-hex-str: ie-hex-str($rgba);
+  background-color: $rgba;
+  filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#{$ie-hex-str},endColorstr=#{$ie-hex-str});
+}
 
 // Bar Mixins
 // --------------------------------------------------
@@ -881,4 +887,32 @@ CSS output:
       }
     }
   }
+}
+
+
+@mixin opacity($opacity) {
+  opacity: $opacity;
+  $opacity-ie: $opacity * 100;
+  filter: alpha(opacity=$opacity-ie); //IE8
+}
+
+@mixin ellipsis($max-height: 0, $lines: 1) {
+  // Fallback for non-webkit browsers.
+  // Fallback does not render ellipsis.
+  display:block;
+  overflow: hidden;
+  @if $max-height and $lines > 1 {
+    white-space:normal;
+    max-height: $max-height;
+    // Webkit solution for multiline ellipsis
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: $lines;  
+    // Solution for Opera
+    text-overflow: -o-ellipsis-lastline;
+  } @else{
+    white-space:nowrap;
+  }
+  
+  text-overflow: ellipsis;
 }

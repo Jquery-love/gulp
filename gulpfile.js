@@ -48,7 +48,7 @@ gulp.task('js',function(){
 gulp.task('sass',function(){
 	var config = {};
 	// if(gcf.env == 'dev'){config.sourceComments = 'map';config.errLogToConsole = true;config.outputStyle = 'compact';}
-	config.outputStyle = 'compressed';
+	config.outputStyle = 'compact';
 	return gulp.src([gcf.devDir + '/**/css/[^_]*.scss','!' + gcf.devDir +'/**/?parts/[^_]*.scss'])
 		.pipe(plugins.changed(gcf.outDir,{extension : '.css'}))
 		.pipe(plugins.sass(config).on('error', plugins.sass.logError))
@@ -60,7 +60,7 @@ gulp.task('sass',function(){
 
 // 清空图片、样式、js
 gulp.task('clean', function() {
-	var clearDirs = [gcf.outDir+'/'+ gcf.item +'/css/', gcf.outDir+'/'+ gcf.item +'/js/', gcf.outDir+'/'+ gcf.item +'/img/'];
+	var clearDirs = [gcf.outDir+'/'+ gcf.item +'/css/',gcf.outDir+'/'+ gcf.item +'/html/', gcf.outDir+'/'+ gcf.item +'/js/', gcf.outDir+'/'+ gcf.item +'/img/'];
     return gulp.src(clearDirs, {read: false})
         .pipe(plugins.clean({force: true}));
 });

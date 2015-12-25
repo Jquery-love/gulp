@@ -32,4 +32,22 @@ $(function(){
             }
         });
 	}($('.floatBox'),$('#footer_index'));
+    // $.ajax({
+    //     url : 'http://192.168.16.16:8081/register',
+    //     data: {
+    //         "pn":"18668239181",
+    //         "nickname":"翻滚吧",
+    //         "password":"123456",
+    //         "appId":"1",
+    //         "captchaCode":"253462",
+    //         "ip":"192.168.0.68",
+    //         "type":"0"
+    //     },
+    //     type : 'POST',
+    //     success:function(res){
+    //         console.log(res);
+    //     }
+    // });
+
+
 });
